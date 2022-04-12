@@ -1,8 +1,10 @@
 import time
+import random
 
 def print_pause(message):
     print(message)
     time.sleep(2)
+    
 
 def intro():    
 print_pause("You find yourself standing in an open field, filled with grass and yellow wildflowers.")  
