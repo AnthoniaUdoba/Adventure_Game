@@ -4,7 +4,8 @@ import random
 # Choose a random weapon
 defense = ["knife", "sword", "gun", "dagger"]
 weapon = random.choice(defense)
-enemy = []
+enemies = ['gorgon', 'troll', 'pirate', 'dragon', 'monster']
+enemy = random.choice(enemies)
 
 
 # Print and pause messages so as to be readable
@@ -31,7 +32,7 @@ def intro():
                 "with your friends,\n")
     print_pause("You mysteriously find yourself standing in an open field, "
                 "filled with grass and yellow wildflowers.\n")
-    print_pause("Rumor has it that a terrifying figure is somewhere around "
+    print_pause("Rumor has it that a " + enemy + " is somewhere around "
                 "the vicinity, and has been scaring the nearby village.\n")
     print_pause("In front of you is a house.\n")
     print_pause("To your right is a dark cave.\n")
@@ -52,8 +53,8 @@ def choose():
 def knock():
     print_pause("You approach the door of the house.\n")
     print_pause("You are about to knock when the door opens and "
-                "out steps a terrifying creature.\n")
-    print_pause("Eep! This is the monsters's house!\n")
+                "out steps a " + enemy + ".\n")
+    print_pause("Eep! This is the " + enemy + " house!\n")
     print_pause("The monster attacks you!\n")
     print_pause("You feel a bit under-prepared for this, "
                 "what with only having a tiny " + weapon + ".\n")
@@ -74,7 +75,7 @@ def cave():
 # hide because of fear
 def hide():
     print_pause("you hide beside your bicycle and scream for help!\n")
-    print_pause("the creature comes close, throws "
+    print_pause("the " + enemy + " comes close, throws "
                 "away your bicycle and eats you up!\n")
     print_pause("You have been defeated!\n")
     play_game_again()
@@ -85,19 +86,19 @@ def fight():
     fight_choice = input("Would you like to (1) fight or (2) run away?\n")
     if fight_choice == '1':
         if 'sword' in weapon:
-            print_pause("As the creature moves to attack, you unsheath"
+            print_pause("As the " + enemy + " moves to attack, you unsheath"
                         " your new sword\n")
             print_pause("The sword of Ogoroth shines brightly in your"
                         " hand as you brace yourself for the attack.\n")
-            print_pause("But the creature takes one look at your shiny"
+            print_pause("But the " + enemy + " takes one look at your shiny"
                         " new " + weapon + " and runs away!\n")
-            print_pause("You have rid the town of the terrifying creature"
+            print_pause("You have rid the town of the " + enemy + ""
                         ". You are victorious!\n")
 
         else:
             print_pause("You do your best...\n")
             print_pause("But your " + weapon + " "
-                        "is no match for the creature.\n")
+                        "is no match for the " + enemy + ".\n")
             print_pause("You have been defeated!\n")
         play_game_again()
 
@@ -120,7 +121,7 @@ def play_game_again():
         print_pause("GAME OVER")
         exit()
     elif "yes" in play_again:
-        print_pause("Excellent! Restarting the game...")
+        print_pause("Excellent! Restarting the game...\n")
         intro()
 
 
