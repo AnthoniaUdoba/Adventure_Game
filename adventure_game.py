@@ -1,7 +1,7 @@
 import time
 import random
 
-# Choose a random weapon
+# Choose a random weapon and a random enemy
 defense = ["knife", "sword", "gun", "dagger"]
 enemies = ['gorgon', 'troll', 'pirate', 'dragon', 'monster']
 
@@ -15,11 +15,12 @@ def print_pause(message):
 def valid_input(prompt, option1):
     while True:
         response = input(prompt).lower()
-        if response in option1: 
+        if response in option1:
             break
         else:
             print_pause("Sorry, I don't understand.")
     return response
+
 
 # game introduction
 def intro():
@@ -84,7 +85,7 @@ def hide():
 # fighting the creature
 def fight():
     response = valid_input("Would you like to (1) fight or (2) run away?\n",
-                          ['1', '2'])
+                           ['1', '2'])
     if response == '1':
         if 'sword' in weapon:
             print_pause("As the " + enemy + " moves to attack, you unsheath"
@@ -116,7 +117,7 @@ def fight():
 # choose betweeon playing again or ending the game
 def play_game_again():
     response = valid_input("Would you like to play again? "
-                            "Please say 'yes' or 'no'.\n","yes or no")
+                           "Please say 'yes' or 'no'.\n", "yes or no")
     if "no" in response:
         print_pause("GAME OVER\n")
         exit()
@@ -128,7 +129,7 @@ def play_game_again():
         intro()
 
 
-# making a choice
+# making a decision
 def choice():
     response = valid_input("Please enter 1, 2 or 3.\n", "1 2 3")
     if response == '1':
