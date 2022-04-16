@@ -3,9 +3,7 @@ import random
 
 # Choose a random weapon
 defense = ["knife", "sword", "gun", "dagger"]
-weapon = random.choice(defense)
 enemies = ['gorgon', 'troll', 'pirate', 'dragon', 'monster']
-enemy = random.choice(enemies)
 
 
 # Print and pause messages so as to be readable
@@ -14,20 +12,21 @@ def print_pause(message):
     time.sleep(2)
 
 
-def valid_input(prompt, option1, option2):
+def valid_input(prompt, option1):
     while True:
         response = input(prompt).lower()
-        if option1 in response:
-            break
-        elif option2 in response:
+        if response in option1: 
             break
         else:
             print_pause("Sorry, I don't understand.")
     return response
 
-
 # game introduction
 def intro():
+    global weapon
+    weapon = random.choice(defense)
+    global enemy
+    enemy = random.choice(enemies)
     print_pause("While cycling home from a Game session "
                 "with your friends,\n")
     print_pause("You mysteriously find yourself standing in an open field, "
@@ -38,15 +37,16 @@ def intro():
     print_pause("To your right is a dark cave.\n")
     print_pause(f"In your hand you hold your trusty "
                 "(but not very effective) " + weapon + ".\n")
-    choice()
+    choose()
 
 
 # making a choice
 def choose():
-    print_pause("What would you like to do?")
-    choice = input("Enter 1 to knock on the door of the house.")
-    ("Enter 2 to peer into the cave.")
-    ("Enter 3 to hide")
+    print_pause("What would you like to do?\n")
+    print_pause("Enter 1 to knock on the door of the house.\n")
+    print_pause("Enter 2 to peer into the cave.\n")
+    print_pause("Enter 3 to hide\n")
+    choice()
 
 
 # knocking on the door
@@ -55,7 +55,7 @@ def knock():
     print_pause("You are about to knock when the door opens and "
                 "out steps a " + enemy + ".\n")
     print_pause("Eep! This is the " + enemy + " house!\n")
-    print_pause("The monster attacks you!\n")
+    print_pause("The " + enemy + " attacks you!\n")
     print_pause("You feel a bit under-prepared for this, "
                 "what with only having a tiny " + weapon + ".\n")
 
@@ -69,7 +69,7 @@ def cave():
     print_pause("You discard your silly old " + weapon + " "
                 "and take the sword with you.\n")
     print_pause("You walk back out out to the field.\n")
-    choice()
+    choose()
 
 
 # hide because of fear
@@ -83,8 +83,9 @@ def hide():
 
 # fighting the creature
 def fight():
-    fight_choice = input("Would you like to (1) fight or (2) run away?\n")
-    if fight_choice == '1':
+    response = valid_input("Would you like to (1) fight or (2) run away?\n",
+                          ['1', '2'])
+    if response == '1':
         if 'sword' in weapon:
             print_pause("As the " + enemy + " moves to attack, you unsheath"
                         " your new sword\n")
@@ -102,10 +103,10 @@ def fight():
             print_pause("You have been defeated!\n")
         play_game_again()
 
-    elif fight_choice == '2':
+    elif response == '2':
         print_pause("You run back into the field. Luckily, "
                     "you don't seem to have been followed.\n")
-        choice()
+        choose()
 
     else:
         print_pause("choose the correct option\n")
@@ -114,29 +115,28 @@ def fight():
 
 # choose betweeon playing again or ending the game
 def play_game_again():
-    play_again = valid_input("Would you like to play again? "
-                             "pick 'yes' or 'no'.\n",
-                             "yes", "no")
-    if "no" in play_again:
-        print_pause("GAME OVER")
+    response = valid_input("Would you like to play again? "
+                            "Please say 'yes' or 'no'.\n","yes or no")
+    if "no" in response:
+        print_pause("GAME OVER\n")
         exit()
-    elif "yes" in play_again:
+    elif "yes" in response:
+        global weapon
         print_pause("Excellent! Restarting the game...\n")
+        enemies = ['gorgon', 'troll', 'pirate', 'dragon', 'monster']
+        defense = ["knife", "sword", "gun", "dagger"]
         intro()
 
 
 # making a choice
 def choice():
-    print_pause("What would you like to do?\n")
-    choice_option = input("1. knock on the door of the house.\n"
-                          "2. peer into the cave.\n"
-                          "3. hide\n")
-    if choice_option == '1':
+    response = valid_input("Please enter 1, 2 or 3.\n", "1 2 3")
+    if response == '1':
         knock()
         fight()
-    elif choice_option == '2':
+    elif response == '2':
         cave()
-    elif choice_option == '3':
+    elif response == '3':
         hide()
 
     else:
@@ -145,4 +145,4 @@ def choice():
 
 
 intro()
-choice()
+choose()
